@@ -9,6 +9,7 @@ import { GlobalStyles } from "./GlobalStyles";
 import TweetDetails from "./TweetDetails";
 import { CurrentUserContext } from "./CurrentUserContext";
 import styled from 'styled-components';
+import {Error} from './Error'
 
 const App = (props) => {
   const { currentUser, status } = React.useContext(CurrentUserContext);
@@ -35,6 +36,9 @@ const App = (props) => {
             </Route>
             <Route path={`/profile/${currentUser.handle}`}>
               <Profile />
+            </Route>
+            <Route path='/error'>
+              <Error/>
             </Route>
           </Switch>
         </Router>
