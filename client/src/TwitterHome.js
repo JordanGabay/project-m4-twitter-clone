@@ -5,8 +5,10 @@ import Action from "./Action";
 import Icon from "react-icons-kit";
 import { heart, messageSquare, repeat, share } from "react-icons-kit/feather/";
 
+
 const TwitterHomeFeed = ({ tweetFeed }) => {
-  const date = moment().format("h:m a - MMM Do, YYYY");
+    const date = moment().format("MMM Do");
+   
   console.log(tweetFeed);
   return tweetFeed.map((tweet) => {
     return (
@@ -15,7 +17,7 @@ const TwitterHomeFeed = ({ tweetFeed }) => {
         <TweetInfo>
           <TweetSpan>{tweet.author.displayName}</TweetSpan>
           {tweet.author.handle && (
-            <TweetSpan1>@{tweet.author.handle}</TweetSpan1>
+            <TweetSpan1>@{tweet.author.handle} {`· ${date}`}</TweetSpan1>
           )}
         </TweetInfo>
         <Status>{tweet.status}</Status>

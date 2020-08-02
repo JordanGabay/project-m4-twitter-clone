@@ -23,7 +23,7 @@ const Profile = () => {
   } = currentUser;
   const date = moment(joined);
   const monthYear = date.format("MMMM YYYY");
-  
+
   return (
     <MainProfileWrapper>
       <Avatar src={avatarSrc} />
@@ -62,8 +62,12 @@ const Profile = () => {
             </StyledSpan>
           </RowWrapper>
         </ProfileWrapper>
-        <Button>Tweets</Button>
       </TopWrapper>
+      <ButtonWrapper>
+        <Button1>Tweets</Button1>
+        <Button1>Media</Button1>
+        <Button1>Likes</Button1>
+      </ButtonWrapper>
     </MainProfileWrapper>
   );
 };
@@ -136,6 +140,23 @@ const StyledSpan = styled.span`
 
 const Bold600 = styled.span`
   font-weight: 600;
+`;
+
+const Button1 = styled.button`
+  background: white;
+  border: none;
+  color: ${COLORS.primary};
+  font-size: 30px;
+  display: flex;
+  margin: 10px 0 0 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 25px;
+  align-items: center;
+`;
+
+const ButtonWrapper = styled.div`
+  justify-content: space-between;
 `;
 
 export default Profile;
