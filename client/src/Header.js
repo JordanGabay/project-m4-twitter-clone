@@ -32,6 +32,7 @@ const Header = (props) => {
         <Icon size={20} icon={bookmark} />
         <LinkText>Bookmarks</LinkText>
       </StyledLink>
+      <Button style={{ background: COLORS.primary }}>Meow</Button>
     </SidebarWrapper>
   );
 };
@@ -72,6 +73,18 @@ const StyledLogo = styled(Logo)`
   width: 50px;
   height: 100px;
   margin-left: 20px;
+`;
+
+const Button = styled.button`
+  align-self: flex-end;
+  border: none;
+  padding: 0.5rem;
+  width: 180px;
+  height: 40px;
+  font-size: 1.25rem;
+  color: white;
+  border-radius: 18px;
+  margin-top: 20px;
 `;
 
 export default Header;
