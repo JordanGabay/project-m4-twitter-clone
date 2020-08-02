@@ -1,14 +1,19 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, {useContext} from 'react';
+import styled from 'styled-components';
+import {CurrentUserContext} from './CurrentUserContext';
 
 const Profile = () => {
+  const {currentUser} = useContext(CurrentUserContext)
+  const {
+    handle,
+    displayName,
+    avatarSrc,
+
+  } = currentUser
+  console.table(currentUser)
   return(
-      <Text>Profile</Text>
+    <img src={avatarSrc} />
   )
 }
-
-const Text = styled.div`
-margin-left:200px;
-`
 
 export default Profile;

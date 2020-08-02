@@ -1,6 +1,11 @@
-import styled from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyles = styled.div`
-    font: 1em sans-serif;
-    display: flex;
-    `
+export const GlobalStyles = createGlobalStyle`
+    * {
+        font: 1em sans-serif;
+    }
+
+    div {
+        display: flex;
+    }
+`;
