@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import moment from "moment";
 import { COLORS } from "./constants";
 import { mapPin, calendar } from "react-icons-kit/feather";
 import { Icon } from "react-icons-kit";
+import Spinner from './Spinner'
+
+
 
 const Profile = () => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, status } = useContext(CurrentUserContext);
+  const [profileFeedInfo ]= useState(null);
+  
   const {
     avatarSrc,
     handle,
@@ -24,7 +29,23 @@ const Profile = () => {
   const date = moment(joined);
   const monthYear = date.format("MMMM YYYY");
 
+ useEffect(() => {
+   const profileFeedInfo = async () => {
+     try {
+       const res = await fetch(`/api/${handle}/feed`)
+       const data = await res.json()
+     } catch (error) {
+     }
+   }
+   profileFeedInfo()
+ }, [])
+
+
+
   return (
+    <>
+      {status === "loading" && <Spinner />}
+      {status === "idle" && (
     <MainProfileWrapper>
       <Avatar src={avatarSrc} />
       <TopWrapper style={{ position: "relative", top: "-140px" }}>
@@ -55,10 +76,10 @@ const Profile = () => {
           </RowWrapper>
           <RowWrapper>
             <StyledSpan>
-              <Bold600>{numFollowing}</Bold600> Following
+              <BoldFont>{numFollowing}</BoldFont> Following
             </StyledSpan>
             <StyledSpan>
-              <Bold600>{numFollowers}</Bold600> Followers
+              <BoldFont>{numFollowers}</BoldFont> Followers
             </StyledSpan>
           </RowWrapper>
         </ProfileWrapper>
@@ -67,8 +88,11 @@ const Profile = () => {
         <Button1>Tweets</Button1>
         <Button1>Media</Button1>
         <Button1>Likes</Button1>
+        <CritterFeed critterFeed={profileFeedInfo}/>
       </ButtonWrapper>
     </MainProfileWrapper>
+      )}
+    </>
   );
 };
 
@@ -138,7 +162,7 @@ const StyledSpan = styled.span`
   margin: 10px 15px;
 `;
 
-const Bold600 = styled.span`
+const BoldFont = styled.span`
   font-weight: 600;
 `;
 
@@ -146,7 +170,7 @@ const Button1 = styled.button`
   background: white;
   border: none;
   color: ${COLORS.primary};
-  font-size: 30px;
+  font-size: 20px;
   display: flex;
   margin: 10px 0 0 20px;
   text-decoration: none;
@@ -158,5 +182,9 @@ const Button1 = styled.button`
 const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
+
+const CritterFeed = styled.div`
+
+`
 
 export default Profile;

@@ -3,26 +3,29 @@ import moment from "moment";
 import styled from "styled-components";
 import Action from "./Action";
 import Icon from "react-icons-kit";
-import { heart, messageSquare, repeat, share } from "react-icons-kit/feather/";
-
+import { heart, messageSquare, repeat, share, } from "react-icons-kit/feather/";
 
 const TwitterHomeFeed = ({ tweetFeed }) => {
-    const date = moment().format("MMM Do");
-   
-  console.log(tweetFeed);
   return tweetFeed.map((tweet) => {
     return (
       <Tweet>
-        <Avatar src={tweet.author.avatarSrc} />
         <TweetInfo>
-          <TweetSpan>{tweet.author.displayName}</TweetSpan>
-          {tweet.author.handle && (
-            <TweetSpan1>@{tweet.author.handle} {`· ${date}`}</TweetSpan1>
-          )}
+          <Avatar src={tweet.author.avatarSrc} />
+          <div style={{display: "flex", flexDirection:"column"}}>
+            <div>
+              <TweetSpan>{tweet.author.displayName}</TweetSpan>
+              {tweet.author.handle && (
+                <TweetSpan1>
+                  @{tweet.author.handle}{" "}
+                  {`· ${moment(tweet.timestamp).format("MMM Do")}`}
+                </TweetSpan1>
+              )}
+            </div>
+            <Status>{tweet.status}</Status>
+          </div>
         </TweetInfo>
-        <Status>{tweet.status}</Status>
         <ImageWrapper>
-        {tweet.media[0] && <Media src={tweet.media[0].url} />}
+          {tweet.media[0] && <Media src={tweet.media[0].url} />}
         </ImageWrapper>
         <MediaWrapper>
           <Action color="rgb(27, 149, 224)" size={40}>
@@ -69,6 +72,8 @@ const Avatar = styled.img`
 const Status = styled.span`
   font-size: 1.5rem;
   padding: 10px;
+  display: flex;
+  float: left;
 `;
 
 const Media = styled.img`
@@ -82,10 +87,12 @@ const Media = styled.img`
 const TweetSpan = styled.span`
   margin: 0 1rem;
   font-weight: bold;
+  margin-top: 10px;
 `;
 
 const TweetSpan1 = styled.span`
   color: grey;
+  margin-top: 10px;
 `;
 
 const MediaWrapper = styled.div`
@@ -96,8 +103,8 @@ const MediaWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-align-items: center;
-display: flex;
-`
+  align-items: center;
+  display: flex;
+`;
 
 export default TwitterHomeFeed;

@@ -10,13 +10,14 @@ import TweetDetails from "./TweetDetails";
 import { CurrentUserContext } from "./CurrentUserContext";
 import styled from 'styled-components';
 import {Error} from './Error'
+import Spinner from "./Spinner";
 
 const App = (props) => {
   const { currentUser, status } = React.useContext(CurrentUserContext);
 
   return (
     <Wrapper>
-      {status === "loading" && <h2>Loading...</h2>}
+      {status === "loading" && <Spinner />}
       {status === "idle" && (
         <Router>
           <GlobalStyles />

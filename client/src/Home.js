@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import TwitterHome from "./TwitterHome";
 import { COLORS } from "./constants";
-import Spinner from './Spinner';
+import Spinner from "./Spinner";
 
 const { primary } = COLORS;
 
@@ -37,9 +37,9 @@ const Homefeed = () => {
         </UserPost>
         {tweetFeed ? (
           <TwitterHome tweetFeed={tweetFeed} />
-        ) : (
-          <div>Loading...</div>
-        )}
+          ) : (
+            <Spinner/>
+            )}
       </Wrapper>
     </MainWrapper>
   );
