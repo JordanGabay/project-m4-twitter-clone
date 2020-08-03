@@ -8,8 +8,8 @@ import Bookmarks from "./Bookmarks";
 import { GlobalStyles } from "./GlobalStyles";
 import TweetDetails from "./TweetDetails";
 import { CurrentUserContext } from "./CurrentUserContext";
-import styled from 'styled-components';
-import {Error} from './Error'
+import styled from "styled-components";
+import { Error } from "./Error";
 import Spinner from "./Spinner";
 
 const App = (props) => {
@@ -38,8 +38,8 @@ const App = (props) => {
             <Route path={`/profile/${currentUser.handle}`}>
               <Profile />
             </Route>
-            <Route path='/error'>
-              <Error/>
+            <Route path="/error">
+              <Error />
             </Route>
           </Switch>
         </Router>
@@ -48,8 +48,6 @@ const App = (props) => {
   );
 };
 
-const Wrapper = styled.div`
-  
-`
+const Wrapper = styled.div``;
 
 export default App;

@@ -3,7 +3,7 @@ import moment from "moment";
 import styled from "styled-components";
 import Action from "./Action";
 import Icon from "react-icons-kit";
-import { heart, messageSquare, repeat, share, } from "react-icons-kit/feather/";
+import { heart, messageSquare, repeat, share } from "react-icons-kit/feather/";
 
 const TwitterHomeFeed = ({ tweetFeed }) => {
   return tweetFeed.map((tweet) => {
@@ -11,7 +11,7 @@ const TwitterHomeFeed = ({ tweetFeed }) => {
       <Tweet>
         <TweetInfo>
           <Avatar src={tweet.author.avatarSrc} />
-          <div style={{display: "flex", flexDirection:"column"}}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <div>
               <TweetSpan>{tweet.author.displayName}</TweetSpan>
               {tweet.author.handle && (

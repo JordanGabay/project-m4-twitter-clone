@@ -4,11 +4,13 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import TwitterHome from "./TwitterHome";
 import { COLORS } from "./constants";
 import Spinner from "./Spinner";
+import NewTweetCalculator from "./NewTweetCalculator";
 
 const { primary } = COLORS;
 
 const Homefeed = () => {
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, postNewTweet } = useContext(CurrentUserContext);
+  const [textInput, setTextInput] = useState("");
   const [tweetFeed, setTweetFeed] = useState(null);
   const { avatarSrc } = currentUser;
 
@@ -25,21 +27,28 @@ const Homefeed = () => {
       });
   }, []);
 
+  const textSubmitClick = () => {
+    if (textInput.length > 280) {
+      return null;
+    } else {
+      postNewTweet(textInput);
+    }
+  };
+
   return (
-      
     <MainWrapper>
       <Wrapper>
         <HomeText>Home</HomeText>
         <UserPost>
           <Avatar src={avatarSrc} />
-          <TextBox placeholder="What's happening?" maxLength='280' />
-          <Button>Meow</Button>
+          <TextBox
+            placeholder="What's happening?"
+            onChange={(event) => setTextInput(event.target.value)}
+          ></TextBox>
+          <NewTweetCalculator textInput={textInput} />
+          <Button onClick={textSubmitClick}>Meow</Button>
         </UserPost>
-        {tweetFeed ? (
-          <TwitterHome tweetFeed={tweetFeed} />
-          ) : (
-            <Spinner/>
-            )}
+        {tweetFeed ? <TwitterHome tweetFeed={tweetFeed} /> : <Spinner />}
       </Wrapper>
     </MainWrapper>
   );

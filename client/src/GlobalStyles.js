@@ -7,5 +7,6 @@ export const GlobalStyles = createGlobalStyle`
 
     div {
         display: flex;
+        
     }
 `;

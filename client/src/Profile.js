@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import moment from "moment";
 import { COLORS } from "./constants";
 import { mapPin, calendar } from "react-icons-kit/feather";
 import { Icon } from "react-icons-kit";
-import Spinner from './Spinner'
-
-
+import Spinner from "./Spinner";
+import CritterFeed from './CritterFeed'
 
 const Profile = () => {
   const { currentUser, status } = useContext(CurrentUserContext);
-  const [profileFeedInfo ]= useState(null);
-  
+
   const {
     avatarSrc,
     handle,
@@ -29,68 +27,60 @@ const Profile = () => {
   const date = moment(joined);
   const monthYear = date.format("MMMM YYYY");
 
- useEffect(() => {
-   const profileFeedInfo = async () => {
-     try {
-       const res = await fetch(`/api/${handle}/feed`)
-       const data = await res.json()
-     } catch (error) {
-     }
-   }
-   profileFeedInfo()
- }, [])
-
-
-
   return (
     <>
       {status === "loading" && <Spinner />}
       {status === "idle" && (
-    <MainProfileWrapper>
-      <Avatar src={avatarSrc} />
-      <TopWrapper style={{ position: "relative", top: "-140px" }}>
-        <Banner src={bannerSrc} />
-        <TopWrapper style={{ alignItems: "flex-end", padding: "20px 15px" }}>
-          <Button style={{ background: COLORS.primary }}>
-            {isBeingFollowedByYou ? "Following" : "Follow"}
-          </Button>
-        </TopWrapper>
-        <ProfileWrapper>
-          <Handle className="titleFont">{displayName}</Handle>
-          <RowWrapper style={{ alignItems: "center" }}>
-            <SmallText>@{handle}</SmallText>
-            <FollowingText>
-              {isFollowingYou ? "Follows You" : "Follows you"}
-            </FollowingText>
-          </RowWrapper>
-          <StyledSpan>{bio}</StyledSpan>
-          <RowWrapper>
-            <StyledSpan>
-              <Icon size={15} icon={mapPin} />
-              {location}
-            </StyledSpan>
-            <StyledSpan>
-              <Icon size={15} icon={calendar} />
-              Joined {monthYear}
-            </StyledSpan>
-          </RowWrapper>
-          <RowWrapper>
-            <StyledSpan>
-              <BoldFont>{numFollowing}</BoldFont> Following
-            </StyledSpan>
-            <StyledSpan>
-              <BoldFont>{numFollowers}</BoldFont> Followers
-            </StyledSpan>
-          </RowWrapper>
-        </ProfileWrapper>
-      </TopWrapper>
-      <ButtonWrapper>
-        <Button1>Tweets</Button1>
-        <Button1>Media</Button1>
-        <Button1>Likes</Button1>
-        <CritterFeed critterFeed={profileFeedInfo}/>
-      </ButtonWrapper>
-    </MainProfileWrapper>
+        <MainProfileWrapper>
+          <Avatar src={avatarSrc} />
+          <TopWrapper style={{ position: "relative", top: "-140px" }}>
+            <Banner src={bannerSrc} />
+            <TopWrapper
+              style={{ alignItems: "flex-end", padding: "20px 15px" }}
+            >
+              <Button style={{ background: COLORS.primary }}>
+                {isBeingFollowedByYou ? "Following" : "Follow"}
+              </Button>
+            </TopWrapper>
+            <ProfileWrapper>
+              <Handle className="titleFont">{displayName}</Handle>
+              <RowWrapper style={{ alignItems: "center" }}>
+                <SmallText>@{handle}</SmallText>
+                <FollowingText>
+                  {isFollowingYou ? "Follows You" : "Follows you"}
+                </FollowingText>
+              </RowWrapper>
+              <StyledSpan>{bio}</StyledSpan>
+              <RowWrapper>
+                <StyledSpan>
+                  <Icon size={15} icon={mapPin} />
+                  {location}
+                </StyledSpan>
+                <StyledSpan>
+                  <Icon size={15} icon={calendar} />
+                  Joined {monthYear}
+                </StyledSpan>
+              </RowWrapper>
+              <RowWrapper>
+                <StyledSpan>
+                  <BoldFont>{numFollowing}</BoldFont> Following
+                </StyledSpan>
+                <StyledSpan>
+                  <BoldFont>{numFollowers}</BoldFont> Followers
+                </StyledSpan>
+              </RowWrapper>
+            </ProfileWrapper>
+          </TopWrapper>
+          <ButtonWrapper>
+            <Button1>Tweets</Button1>
+            <Button1>Media</Button1>
+            <Button1>Likes</Button1>
+          </ButtonWrapper>
+          {/* create a wrapper */}
+          <>
+            <CritterFeed />
+          </>
+        </MainProfileWrapper>
       )}
     </>
   );
@@ -182,9 +172,5 @@ const Button1 = styled.button`
 const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
-
-const CritterFeed = styled.div`
-
-`
 
 export default Profile;
