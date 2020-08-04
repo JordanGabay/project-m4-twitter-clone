@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 
+
 export default function Critterfeed() {
   const {
     currentUser: { handle },
@@ -10,11 +11,20 @@ export default function Critterfeed() {
   useEffect(() => {
     fetch(`/api/${handle}/feed`)
       .then((res) => res.json())
-      .then(({tweetsById}) => {
+      .then(({ tweetsById }) => {
         console.log(tweetsById);
-        setCritterFeed({...tweetsById});
+        setCritterFeed({ ...tweetsById });
       });
   }, []);
 
-  return <div>feed</div>;
+  return (
+    <div>
+      {Object.values(critterFeed).map((tweet, index) => (
+        <Tweet key={index} tweet={tweet} />
+			))}
+    </div>
+  );
 }
+
+
+

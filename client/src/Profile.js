@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import moment from "moment";
@@ -6,7 +6,7 @@ import { COLORS } from "./constants";
 import { mapPin, calendar } from "react-icons-kit/feather";
 import { Icon } from "react-icons-kit";
 import Spinner from "./Spinner";
-import CritterFeed from './CritterFeed'
+// import CritterFeed from './CritterFeed'
 
 const Profile = () => {
   const { currentUser, status } = useContext(CurrentUserContext);
@@ -78,7 +78,7 @@ const Profile = () => {
           </ButtonWrapper>
           {/* create a wrapper */}
           <>
-            <CritterFeed />
+            {/* <CritterFeed /> */}
           </>
         </MainProfileWrapper>
       )}
@@ -174,3 +174,4 @@ const ButtonWrapper = styled.div`
 `;
 
 export default Profile;
+

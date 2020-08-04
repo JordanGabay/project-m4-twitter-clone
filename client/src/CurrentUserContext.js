@@ -59,3 +59,4 @@ const CurrentUserProvider = ({ children }) => {
 };
 
 export default CurrentUserProvider;
+
