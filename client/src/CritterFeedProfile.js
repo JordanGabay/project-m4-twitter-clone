@@ -1,30 +1,37 @@
-import React, { useEffect, useState, useContext } from "react";
-import { CurrentUserContext } from "./CurrentUserContext";
+import React, { useContext, useState, useEffect } from "react";
+import { CurrentUserContext } from './CurrentUserContext';
+import Tweet from "./Tweet";
+import styled from "styled-components";
 
-
-export default function Critterfeed() {
-  const {
-    currentUser: { handle },
-  } = useContext(CurrentUserContext);
-  const [critterFeed, setCritterFeed] = useState({});
+export default () => {
+  const { currentUser } = useContext(CurrentUserContext);
+  const { handle } = currentUser;
+  const [feed, setFeed] = useState({});
 
   useEffect(() => {
-    fetch(`/api/${handle}/feed`)
-      .then((res) => res.json())
-      .then(({ tweetsById }) => {
-        console.log(tweetsById);
-        setCritterFeed({ ...tweetsById });
-      });
-  }, []);
+    const fetchProfileFeed = async () => {
+      const res = await fetch(`/api/${handle}/feed`);
+      const { tweetsById } = await res.json();
+      setFeed({ ...tweetsById });
+    };
+    fetchProfileFeed();
+  }, [handle]);
 
   return (
-    <div>
-      {Object.values(critterFeed).map((tweet, index) => (
-        <Tweet key={index} tweet={tweet} />
-			))}
-    </div>
+    <ProfileFeedWrapper>
+      {feed &&
+        Object.values(feed).map((tweet, index) => {
+          console.count("return");
+          return <Tweet key={index} tweet={tweet} />;
+        })}
+    </ProfileFeedWrapper>
   );
-}
+};
+
+const ProfileFeedWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 
 

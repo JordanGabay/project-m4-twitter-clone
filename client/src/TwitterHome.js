@@ -8,7 +8,7 @@ import { heart, messageSquare, repeat, share } from "react-icons-kit/feather/";
 const TwitterHomeFeed = ({ tweetFeed }) => {
   return tweetFeed.map((tweet) => {
     return (
-      <Tweet>
+      <Tweet1>
         <TweetInfo>
           <Avatar src={tweet.author.avatarSrc} />
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -41,12 +41,12 @@ const TwitterHomeFeed = ({ tweetFeed }) => {
             <Icon icon={share} />
           </Action>
         </MediaWrapper>
-      </Tweet>
+      </Tweet1>
     );
   });
 };
 
-const Tweet = styled.div`
+const Tweet1 = styled.div`
   margin: 2rem 0;
   padding-bottom: 1rem;
   display: flex;

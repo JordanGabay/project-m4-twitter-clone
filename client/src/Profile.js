@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 import styled from "styled-components";
 import { CurrentUserContext } from "./CurrentUserContext";
 import moment from "moment";
@@ -6,7 +6,9 @@ import { COLORS } from "./constants";
 import { mapPin, calendar } from "react-icons-kit/feather";
 import { Icon } from "react-icons-kit";
 import Spinner from "./Spinner";
-// import CritterFeed from './CritterFeed'
+import Handle from './Handle';
+import CritterFeedProfile from './CritterFeedProfile'
+
 
 const Profile = () => {
   const { currentUser, status } = useContext(CurrentUserContext);
@@ -43,9 +45,9 @@ const Profile = () => {
               </Button>
             </TopWrapper>
             <ProfileWrapper>
-              <Handle className="titleFont">{displayName}</Handle>
+              <DisplayName className="titleFont">{displayName}</DisplayName>
               <RowWrapper style={{ alignItems: "center" }}>
-                <SmallText>@{handle}</SmallText>
+                <Handle handle={handle}/>
                 <FollowingText>
                   {isFollowingYou ? "Follows You" : "Follows you"}
                 </FollowingText>
@@ -76,10 +78,9 @@ const Profile = () => {
             <Button1>Media</Button1>
             <Button1>Likes</Button1>
           </ButtonWrapper>
-          {/* create a wrapper */}
-          <>
-            {/* <CritterFeed /> */}
-          </>
+         <ProfileTweetWrapper>
+           <CritterFeedProfile/>
+         </ProfileTweetWrapper>
         </MainProfileWrapper>
       )}
     </>
@@ -125,7 +126,7 @@ const ProfileWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Handle = styled.span`
+const DisplayName = styled.span`
   font-size: 22px;
   margin-left: 15px;
 `;
@@ -133,11 +134,6 @@ const Handle = styled.span`
 const RowWrapper = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const SmallText = styled.span`
-  font-size: 90%;
-  margin: 5px 0 5px 15px;
 `;
 
 const FollowingText = styled.span`
@@ -173,5 +169,8 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const ProfileTweetWrapper = styled.div`
+
+`
 export default Profile;
 
